@@ -20,9 +20,49 @@
     </header>
 
     <div class="container">
-        <h1 class="page-title">課程簡報資源</h1>
-        <p style="margin-bottom: 30px; opacity: 0.8;">在這裡你可以下載本學期所有的社課教材與練習題目。</p>
+        <h1 class="page-title">課程資源 &amp; 技術專題</h1>
+        <p style="margin-bottom: 30px; opacity: 0.8;">
+            [SYSTEM INFO] 這裡記錄了 NHISC 本學期的基礎課程教材，以及特邀大專院校資安教授親授的高階資安攻防專題。
+        </p>
 
+        <h2 class="page-title" style="font-size: 1.8rem; margin-top: 40px; border-color: #ff00f3;">特邀專題：大專院校教授資安實戰班</h2>
+        <div class="card-grid" style="margin-bottom: 50px;">
+            
+            <div class="card" style="border-color: rgba(255, 0, 243, 0.4);">
+                <h3 style="color: #ff00f3;">【專題一】Web 安全與 WAF 繞過實務</h3>
+                <p style="margin: 10px 0; font-size: 0.95rem;">
+                    <strong>核心技術：</strong>302 跳轉觀測、前端驗證不安全性、路徑走訪 (Path Traversal)<br><br>
+                    深入探討 Web 漏洞原理。教授帶領我們使用工具截獲 302 Redirection 跳轉前的原始封包以獲取敏感資訊；並解構後端 WAF 過濾機制（如舊版 PHP `parse_url` 解析錯誤導致的雙斜線漏洞），實作目錄跳轉（`../`）存取伺服器敏感檔案。
+                </p>
+            </div>
+
+            <div class="card" style="border-color: rgba(255, 0, 243, 0.4);">
+                <h3 style="color: #ff00f3;">【專題二】JS 邏輯解密與 AES 現代密碼學</h3>
+                <p style="margin: 10px 0; font-size: 0.95rem;">
+                    <strong>核心技術：</strong>混淆腳本逆向、CryptoJS 應用、金鑰提取<br><br>
+                    學習如何分析被混淆或加密的前端 JavaScript 驗證腳本。教授指導我們利用數學公式從邏輯中反推解密演算法，並實務提取網頁中的 Hex 格式金鑰 (Key) 與初始向量 (IV)，結合 CyberChef 工具進行現代對稱式加密 AES 的解密實戰。
+                </p>
+            </div>
+
+            <div class="card" style="border-color: rgba(255, 0, 243, 0.4);">
+                <h3 style="color: #ff00f3;">【專題三】Windows PE 結構與二進位逆向</h3>
+                <p style="margin: 10px 0; font-size: 0.95rem;">
+                    <strong>核心技術：</strong>PE 結構分析、十六進位檢視、惡意函數動態/靜態取證<br><br>
+                    邁入底層逆向工程！教授詳細解構 Windows 執行檔的 PE (Portable Executable) 結構，包含 DOS Header、Section Table (.text, .data) 等。並手把手教學使用 <strong>HxD</strong> 進行十六進位編碼分析、<strong>PE Studio</strong> 靜態分析導入函數 (Imports) 以及 <strong>Resource Hacker</strong>。
+                </p>
+            </div>
+
+            <div class="card" style="border-color: rgba(255, 0, 243, 0.4);">
+                <h3 style="color: #ff00f3;">【專題四】數位鑑識：進階隱寫術取證</h3>
+                <p style="margin: 10px 0; font-size: 0.95rem;">
+                    <strong>核心技術：</strong>Magic Number 分析、檔案尾端附加數據、音訊頻譜分析<br><br>
+                    實戰 CTF 常見的數位取證技術。教授帶我們認識各種檔案格式的魔術字元（Magic Number），並利用 <strong>binwalk</strong> 地毯式搜索並分離出隱藏在圖片後方的壓縮檔；同時進階涉足音訊隱寫，使用 <strong>Audacity</strong> 觀察頻譜圖來解析撥號音 (DTMF) 並還原出 Flag 字串。
+                </p>
+            </div>
+
+        </div>
+
+        <h2 class="page-title" style="font-size: 1.8rem;">基礎培訓：社員核心必修課</h2>
         <div class="card-grid">
             <div class="card">
                 <h3 style="color: var(--neon-blue);">Week 2: Python 基礎-1</h3>
@@ -35,7 +75,7 @@
 
             <div class="card">
                 <h3 style="color: var(--neon-blue);">Week 3: Python 基礎-2</h3>
-                <p style="margin: 10px 0;">深入學習 map 函式、List 串列操作與邏輯判斷</p>
+                <p style="margin: 10px 0;">條件判斷式 if-elif-else 與邏輯運算</p>
                 <div style="display: flex; gap: 10px;">
                     <a href="資研社第三堂社課.pdf" class="btn" style="font-size: 0.8rem; padding: 5px 10px;" target="_blank">預覽</a>
                     <a href="資研社第三堂社課.pdf" download class="btn" style="font-size: 0.8rem; padding: 5px 10px; background: var(--neon-blue); color: var(--bg-color);">下載</a>
@@ -43,8 +83,8 @@
             </div>
 
             <div class="card">
-                <h3 style="color: var(--neon-blue);">Week 4: 實作 1A2B 遊戲</h3>
-                <p style="margin: 10px 0;">運用 Python 打造你的第一個互動式小遊戲</p>
+                <h3 style="color: var(--neon-blue);">Week 4: 基礎結構與迴圈</h3>
+                <p style="margin: 10px 0;">for/while 迴圈控制與基礎資料結構</p>
                 <div style="display: flex; gap: 10px;">
                     <a href="資研社第四堂社課.pdf" class="btn" style="font-size: 0.8rem; padding: 5px 10px;" target="_blank">預覽</a>
                     <a href="資研社第四堂社課.pdf" download class="btn" style="font-size: 0.8rem; padding: 5px 10px; background: var(--neon-blue); color: var(--bg-color);">下載</a>
@@ -52,8 +92,8 @@
             </div>
 
             <div class="card">
-                <h3 style="color: var(--neon-blue);">Week 5: 遞迴與進制轉換</h3>
-                <p style="margin: 10px 0;">二進位轉換、遞迴邏輯與邏輯運算 (AND/OR/XOR)</p>
+                <h3 style="color: var(--neon-blue);">Week 5: 實作-九九乘法表與密碼驗證</h3>
+                <p style="margin: 10px 0;">巢狀迴圈應用與邏輯綜合實務練習</p>
                 <div style="display: flex; gap: 10px;">
                     <a href="資研社第五堂社課.pdf" class="btn" style="font-size: 0.8rem; padding: 5px 10px;" target="_blank">預覽</a>
                     <a href="資研社第五堂社課.pdf" download class="btn" style="font-size: 0.8rem; padding: 5px 10px; background: var(--neon-blue); color: var(--bg-color);">下載</a>
@@ -61,8 +101,8 @@
             </div>
 
             <div class="card">
-                <h3 style="color: var(--neon-blue);">Week 6: 演算法基礎</h3>
-                <p style="margin: 10px 0;">氣泡排序、堆疊 (Stack) 與佇列 (Queue) 觀念解析</p>
+                <h3 style="color: var(--neon-blue);">Week 6: 函數與模組</h3>
+                <p style="margin: 10px 0;">程式碼重構：自訂函數、參數傳遞與 Return 機制</p>
                 <div style="display: flex; gap: 10px;">
                     <a href="資研社第六堂社課.pdf" class="btn" style="font-size: 0.8rem; padding: 5px 10px;" target="_blank">預覽</a>
                     <a href="資研社第六堂社課.pdf" download class="btn" style="font-size: 0.8rem; padding: 5px 10px; background: var(--neon-blue); color: var(--bg-color);">下載</a>
@@ -80,7 +120,6 @@
 
             <div class="card">
                 <h3 style="color: var(--neon-blue);">Week 8: 選角挑戰</h3>
-                
                 <p style="margin: 10px 0;">計算英雄綜合能力，練習「計算與排序」組合技能</p>
                 <div style="display: flex; gap: 10px;">
                     <a href="資研社第八堂社課.pdf" class="btn" style="font-size: 0.8rem; padding: 5px 10px;" target="_blank">預覽</a>
@@ -88,6 +127,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </body>
 </html>
