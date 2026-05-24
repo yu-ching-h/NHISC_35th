@@ -1,27 +1,27 @@
-/* style.css - 核心樣式 */
+/* style.css - 35th NHISC 完美修復版 */
 
 :root {
-    /* 定義變數：方便統一修改顏色 */
-    --bg-color: #020a16;      /* 極深藍背景 */
-    --nav-bg: rgba(2, 10, 22, 0.9); /* 導覽列半透明背景 */
-    --text-main: #e0f7fa;     /* 主要文字（極淺藍/白） */
-    --neon-blue: #00f3ff;     /* 核心霓虹藍 (Cyan) */
-    --neon-glow: 0 0 10px #00f3ff, 0 0 20px #00f3ff; /* 發光特效 */
-    --border-color: #1a3c5e;  /* 邊框顏色 */
+    --bg-color: #020a16;      
+    --nav-bg: rgba(2, 10, 22, 0.9); 
+    --text-main: #e0f7fa;     
+    --neon-blue: #00f3ff;     
+    --neon-glow: 0 0 10px #00f3ff, 0 0 20px #00f3ff; 
+    --border-color: #1a3c5e;  
+    --neon-green: #39ff14;    /* 科技綠 */
+    --neon-pink: #ff00f3;     
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace; /* 使用等寬字體增加科技感 */
+    font-family: 'Courier New', Courier, monospace; 
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
     line-height: 1.6;
-    /* 背景網格線特效 */
     background-image: 
         linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
@@ -32,6 +32,7 @@ body {
 header {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -52,13 +53,26 @@ header {
     letter-spacing: 2px;
 }
 
+#menu-toggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.8rem;
+    color: var(--neon-blue);
+    cursor: pointer;
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
 .nav-links {
     list-style: none;
     display: flex;
+    align-items: center;
 }
 
 .nav-links li {
-    margin-left: 30px;
+    margin-left: 25px; /* 稍微縮小防止橫向太擠 */
 }
 
 .nav-links a {
@@ -66,51 +80,101 @@ header {
     color: var(--text-main);
     font-size: 1rem;
     transition: 0.3s;
-    position: relative;
 }
 
-/* 滑鼠移過去的特效 */
 .nav-links a:hover {
     color: var(--neon-blue);
     text-shadow: 0 0 8px var(--neon-blue);
 }
 
-/* --- 主要內容區 --- */
+/* --- 即時狀態燈樣式（放回右側） --- */
+.status-container {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    border-left: 1px solid var(--border-color);
+    padding-left: 15px;
+    margin-left: 10px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    letter-spacing: 1px;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--neon-green);
+    display: inline-block;
+}
+
+.indicator.blink {
+    box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+    animation: statusPulse 2s infinite ease-in-out;
+}
+
+@keyframes statusPulse {
+    0% { opacity: 0.4; box-shadow: 0 0 4px var(--neon-green); }
+    50% { opacity: 1; box-shadow: 0 0 12px var(--neon-green), 0 0 20px var(--neon-green); }
+    100% { opacity: 0.4; box-shadow: 0 0 4px var(--neon-green); }
+}
+
+/* --- 主要內容區（內頁用） --- */
 .container {
-    padding: 120px 10% 60px; /* 避開導覽列的高度 */
+    padding: 120px 10% 60px; 
     min-height: 100vh;
 }
 
-/* 首頁封面大標題 */
+/* --- 【核心修復點】首頁 Hero 區塊 --- */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: -80px; /* 修正 padding 造成的偏移 */
+    /* 關鍵：強制加上 padding-top，把標題往下推，絕對不被 header 擋到！ */
+    padding: 140px 20px 60px; 
 }
 
 .hero h1 {
     font-size: 4rem;
     color: transparent;
-    -webkit-text-stroke: 2px var(--neon-blue); /* 鏤空文字效果 */
+    -webkit-text-stroke: 2px var(--neon-blue); 
     text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
     margin-bottom: 20px;
     letter-spacing: 5px;
+    line-height: 1.3; /* 確保兩行字之間有足夠高度 */
+}
+
+.typing-box {
+    display: inline-block;
+    margin-bottom: 40px;
 }
 
 .hero p {
     font-size: 1.5rem;
     color: var(--text-main);
-    margin-bottom: 40px;
-    border-right: 3px solid var(--neon-blue); /* 打字機游標效果 */
-    padding-right: 10px;
-    animation: blink 1s infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid var(--neon-blue); 
+    width: 0;
+    animation: 
+        typing 3s steps(20) forwards,
+        blink 0.8s infinite;
 }
 
-/* 按鈕樣式 */
+.hero-sub {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-bottom: 35px;
+}
+
 .btn {
     padding: 12px 30px;
     background: transparent;
@@ -125,46 +189,98 @@ header {
 
 .btn:hover {
     background: var(--neon-blue);
-    color: var(--bg-color); /* 反白效果 */
+    color: var(--bg-color); 
     box-shadow: 0 0 20px var(--neon-blue);
 }
 
-/* 內頁標題樣式 */
-.page-title {
-    border-left: 5px solid var(--neon-blue);
-    padding-left: 20px;
-    margin-bottom: 40px;
-    font-size: 2.5rem;
+/* --- 互動式 Terminal 樣式 --- */
+.terminal-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 40px auto 20px;
+    border: 1px solid var(--border-color);
+    background: rgba(2, 10, 22, 0.95);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    text-align: left;
+}
+
+.terminal-header {
+    background: rgba(26, 60, 94, 0.4);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.85rem;
     color: var(--neon-blue);
 }
 
-/* 簡單的卡片樣式 (用於課程、夥伴) */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
 }
 
-.card {
-    border: 1px solid var(--border-color);
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    transition: 0.3s;
+.t-btn { width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; }
+.t-btn.minimize { background: #ffbd2e; }
+.t-btn.maximize { background: #27c93f; }
+
+.terminal-body {
+    padding: 15px;
+    height: 250px;
+    overflow-y: auto;
+    font-size: 0.95rem;
+    color: var(--neon-green); 
 }
 
-.card:hover {
-    border-color: var(--neon-blue);
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
-    transform: translateY(-5px);
+.terminal-output { white-space: pre-wrap; margin-bottom: 10px; }
+.terminal-input-line { display: flex; align-items: center; }
+.prompt { color: var(--neon-blue); margin-right: 8px; white-space: nowrap; }
+.terminal-input {
+    background: transparent;
+    border: none;
+    color: inherit; /* 關鍵：改成 inherit 才會跟著 theme 指令一起變色！ */
+    font-family: inherit;
+    font-size: inherit;
+    width: 100%;
+    outline: none;
 }
+/* 404 專用樣式 */
+.error-body { display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; flex-direction: column; padding: 20px; }
+.error-code { font-size: 6rem; color: var(--neon-pink); text-shadow: 0 0 15px var(--neon-pink); margin-bottom: 10px; }
 
 /* 動畫定義 */
-@keyframes blink {
-    50% { border-color: transparent; }
-}
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink { 50% { border-color: transparent; } }
+@keyframes pulse { 0% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.01); filter: hue-rotate(10deg); } 100% { opacity: 0.3; transform: scale(1); } }
 
-/* RWD 手機版微調 */
+/* --- RWD 手機版響應式設定 --- */
 @media (max-width: 768px) {
-    .nav-links { display: none; } /* 手機版暫時隱藏選單，未來可用 JS 做漢堡選單 */
+    .hamburger { display: block; }
+    .nav-links {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--bg-color);
+        border-bottom: 2px solid var(--neon-blue);
+        padding: 20px 0;
+        box-shadow: 0 10px 15px rgba(0, 243, 255, 0.2);
+    }
+    .nav-links li { margin: 15px 0; text-align: center; width: 100%; }
+    #menu-toggle:checked + .hamburger + .nav-links { display: flex; }
+
+    .status-container {
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+        padding-left: 0;
+        padding-top: 15px;
+        margin-left: 0;
+        margin-top: 5px;
+        justify-content: center;
+    }
+    .hero { padding-top: 120px; }
     .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1.1rem; }
 }

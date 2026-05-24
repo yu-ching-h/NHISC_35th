@@ -10,21 +10,196 @@
 
     <header>
         <div class="logo">NHISC_35th &gt;_</div>
+        
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="hamburger">&#9776;</label>
+
         <ul class="nav-links">
             <li><a href="features.html">課程特色</a></li>
             <li><a href="slides.html">課程簡報</a></li>
             <li><a href="constitution.html">組織章程</a></li>
             <li><a href="partners.html">合作夥伴</a></li>
             <li><a href="about.html">關於我們</a></li>
+            <li>
+                <div class="status-container">
+                    <div class="status-item">
+                        <span class="indicator blink"></span>
+                        <span>SYS: ONLINE</span>
+                    </div>
+                </div>
+            </li>
         </ul>
     </header>
 
     <div class="hero">
-        <h1 style="font-size: 3.5rem;">內湖高中<br>資訊研究社</h1>
-        <p>「迎合時代潮流，為高科技人才打好基礎」</p>
-        <p style="border: none; font-size: 1.1rem; opacity: 0.8; margin-top: -20px;">SYSTEM ONLINE. WELCOME TO NHISC 35th.</p>
-        <a href="about.html" class="btn">ENTER SYSTEM &gt;&gt;</a>
+        <h1>內湖高中<br>資訊研究社</h1>
+        
+        <div class="typing-box">
+            <p>「迎合時代潮流，為高科技人才打好基礎」</p>
+        </div>
+        
+        <p class="hero-sub">SYSTEM ONLINE. WELCOME TO NHISC 35th.</p>
+        <a href="about.html" class="btn" style="margin-bottom: 40px;">ENTER SYSTEM &gt;&gt;</a>
+
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="t-btn"></span>
+                    <span class="t-btn minimize"></span>
+                    <span class="t-btn maximize"></span>
+                </div>
+                <div class="terminal-title">guest@nhisc: ~</div>
+                <div>v1.0.0</div>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-output" id="terminalOutput">WELCOME TO NHISC TERMINAL. Type 'help' for available commands.</div>
+                <div class="terminal-input-line">
+                    <span class="prompt">nhisc_35th@guest:~$</span>
+                    <input type="text" class="terminal-input" id="terminalInput" autofocus autocomplete="off" autocapitalize="none">
+                </div>
+            </div>
+        </div>
     </div>
 
+    <script>
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalOutput = document.getElementById('terminalOutput');
+        const terminalBody = document.getElementById('terminalBody');
+        const terminalContainer = document.querySelector('.terminal-container');
+
+        // 歷史指令紀錄功能 (按上下鍵可以切換舊指令)
+        let commandHistory = [];
+        let historyIndex = -1;
+
+        terminalInput.addEventListener('keydown', function(e) {
+            // 處理「上」鍵：讀取上一個指令
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+                    historyIndex++;
+                    this.value = commandHistory[commandHistory.length - 1 - historyIndex];
+                }
+            }
+            // 處理「下」鍵：讀取下一個指令
+            else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (historyIndex > 0) {
+                    historyIndex--;
+                    this.value = commandHistory[commandHistory.length - 1 - historyIndex];
+                } else if (historyIndex === 0) {
+                    historyIndex = -1;
+                    this.value = '';
+                }
+            }
+            // 處理 Enter 鍵：執行指令
+            else if (e.key === 'Enter') {
+                const rawInput = this.value;
+                const command = rawInput.trim().toLowerCase();
+                
+                if (command !== '') {
+                    commandHistory.push(rawInput); // 存入歷史紀錄
+                }
+                historyIndex = -1; // 重設歷史指標
+                
+                let currentOutput = terminalOutput.innerHTML;
+                currentOutput += `<br><span style="color: var(--neon-blue);">nhisc_35th@guest:~$ ${rawInput}</span><br>`;
+
+                // === 新增/擴充的指令邏輯 ===
+                
+                // 1. 幫助清單
+                if (command === 'help') {
+                    currentOutput += `Available commands:<br>` +
+                                     `  help         - Show this help message<br>` +
+                                     `  cat about.txt- Show club introduction<br>` +
+                                     `  time         - Display current system time<br>` +
+                                     `  theme [color]- Change terminal color (green, cyan, pink, amber)<br>` +
+                                     `  matrix       - Trigger hacker matrix overflow simulation<br>` +
+                                     `  sudo rm -rf /- Total destruction (Caution!)<br>` +
+                                     `  clear        - Clear terminal screen`;
+                } 
+                // 2. 社團簡介
+                else if (command === 'cat about.txt') {
+                    currentOutput += `第 35 屆內湖高中資訊研究社 (NHISC)。<br>` +
+                                     `核心培訓：網頁開發、APCS 觀念實作、資訊安全、CTF 攻防實戰。<br>` +
+                                     `共享與成長，程式愛好者得極客基地。`;
+                } 
+                // 3. 顯示時間功能
+                else if (command === 'time') {
+                    const now = new Date();
+                    currentOutput += `[SYSTEM TIME] ${now.toLocaleString()}`;
+                } 
+                // 4. 換顏色功能 (theme green/cyan/pink/amber)
+                else if (command.startsWith('theme ')) {
+                    const color = command.substring(6).trim();
+                    if (color === 'green') {
+                        terminalBody.style.color = '#39ff14';
+                        terminalInput.style.color = '#39ff14';
+                        currentOutput += `Theme changed to CLASSIC GREEN.`;
+                    } else if (color === 'cyan') {
+                        terminalBody.style.color = '#00f3ff';
+                        terminalInput.style.color = '#00f3ff';
+                        currentOutput += `Theme changed to CYBER CYAN.`;
+                    } else if (color === 'pink') {
+                        terminalBody.style.color = '#ff00f3';
+                        terminalInput.style.color = '#ff00f3';
+                        currentOutput += `Theme changed to NEON PINK.`;
+                    } else if (color === 'amber') {
+                        terminalBody.style.color = '#ffb703';
+                        terminalInput.style.color = '#ffb703';
+                        currentOutput += `Theme changed to RETRO AMBER.`;
+                    } else {
+                        currentOutput += `Unknown theme: '${color}'. Try: green, cyan, pink, amber.`;
+                    }
+                } 
+                // 5. 特效彩蛋：Matrix 數字雨矩陣模擬
+                else if (command === 'matrix') {
+                    currentOutput += `<span style="color: #39ff14;">[LOADING] EXECUTING MATRIX OVERFLOW...</span><br>`;
+                    let count = 0;
+                    const interval = setInterval(() => {
+                        let binaryLine = '';
+                        for(let i=0; i<4; i++) {
+                            binaryLine += Math.random().toString(2).substring(2, 17) + ' ';
+                        }
+                        terminalOutput.innerHTML += `<div style="font-size:0.85rem; opacity:0.8;">${binaryLine}</div>`;
+                        terminalBody.scrollTop = terminalBody.scrollHeight;
+                        count++;
+                        if(count > 15) {
+                            clearInterval(interval);
+                            terminalOutput.innerHTML += `<br>Matrix dump complete.<br>`;
+                            terminalBody.scrollTop = terminalBody.scrollHeight;
+                        }
+                    }, 80);
+                }
+                // 6. 惡作劇破壞指令
+                else if (command === 'sudo rm -rf /') {
+                    currentOutput += `<span style="color: #ff00f3;">[WARNING] SYSTEM CRITICAL ERROR! BOOTING INTO SAFE ZONE...</span>`;
+                    
+                    // 讓螢幕閃爍一下後，1秒內直接強制跳轉到你的 404 頁面！
+                    document.body.style.animation = "pulse 0.2s 3";
+                    setTimeout(() => {
+                        window.location.href = '404.html';
+                    }, 1000);
+                }
+                // 7. 清除畫面
+                else if (command === 'clear') {
+                    currentOutput = `Terminal cleared. Type 'help' for commands.`;
+                } else if (command === '') {
+                    currentOutput += ``;
+                } else {
+                    currentOutput += `Unknown command: '${command}'. Type 'help' for support.`;
+                }
+
+                // 更新畫面並將捲軸拉到底部
+                terminalOutput.innerHTML = currentOutput;
+                this.value = '';
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }
+        });
+
+        // 點擊終端機內部自動自動聚焦輸入框
+        terminalBody.addEventListener('click', () => {
+            terminalInput.focus();
+        });
+    </script>
 </body>
 </html>

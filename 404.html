@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 ACCESS DENIED - NHISC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="error-body">
+
+    <div class="error-code">404</div>
+    
+    <div class="card" style="max-width: 600px; border-color: var(--neon-pink); background: rgba(255, 0, 243, 0.05); box-shadow: 0 0 20px rgba(255, 0, 243, 0.1); padding: 30px; margin-bottom: 30px;">
+        <h2 style="color: var(--neon-pink); margin-bottom: 15px; letter-spacing: 2px;">[ERROR] ACCESS DENIED. SYSTEM COMPROMISED.</h2>
+        <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
+            偵測到未授權的路徑存取。你涉足了未編譯的虛無空間。<br>
+            請點擊下方按鈕修正時空跳轉，返回安全據點。
+        </p>
+    </div>
+
+    <a href="index.html" class="btn" style="border-color: var(--neon-pink); color: var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink);">
+        &lt;&lt; BACK TO SAFE_ZONE
+    </a>
+
+    <script>
+        // 既然是 404，小惡作劇：進入時背景紅黑閃爍一下
+        document.body.style.backgroundColor = "#240008";
+        setTimeout(() => {
+            document.body.style.backgroundColor = "var(--bg-color)";
+        }, 300);
+    </script>
+</body>
+</html>
