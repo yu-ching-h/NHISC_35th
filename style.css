@@ -1,27 +1,28 @@
-/* style.css - 35th NHISC 完美修復版 */
+/* style.css - 35th NHISC 完美合併最終版 */
 
 :root {
-    --bg-color: #020a16;      
-    --nav-bg: rgba(2, 10, 22, 0.9); 
-    --text-main: #e0f7fa;     
-    --neon-blue: #00f3ff;     
-    --neon-glow: 0 0 10px #00f3ff, 0 0 20px #00f3ff; 
-    --border-color: #1a3c5e;  
+    --bg-color: #020a16;      /* 極深藍背景 */
+    --nav-bg: rgba(2, 10, 22, 0.9); /* 導覽列半透明背景 */
+    --text-main: #e0f7fa;     /* 主要文字（極淺藍/白） */
+    --neon-blue: #00f3ff;     /* 核心霓虹藍 (Cyan) */
+    --neon-glow: 0 0 10px #00f3ff, 0 0 20px #00f3ff; /* 發光特效 */
+    --border-color: #1a3c5e;  /* 邊框顏色 */
     --neon-green: #39ff14;    /* 科技綠 */
-    --neon-pink: #ff00f3;     
+    --neon-pink: #ff00f3;     /* 霓虹粉 */
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace; 
+    font-family: 'Courier New', Courier, monospace; /* 使用等寬字體增加科技感 */
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
     line-height: 1.6;
+    /* 背景網格線特效 */
     background-image: 
         linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
@@ -82,6 +83,7 @@ header {
     transition: 0.3s;
 }
 
+/* 滑鼠移過去的特效 */
 .nav-links a:hover {
     color: var(--neon-blue);
     text-shadow: 0 0 8px var(--neon-blue);
@@ -113,6 +115,7 @@ header {
     display: inline-block;
 }
 
+/* 綠色閃爍呼吸特效 */
 .indicator.blink {
     box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
     animation: statusPulse 2s infinite ease-in-out;
@@ -126,11 +129,40 @@ header {
 
 /* --- 主要內容區（內頁用） --- */
 .container {
-    padding: 120px 10% 60px; 
+    padding: 120px 10% 60px; /* 避開導覽列的高度 */
     min-height: 100vh;
 }
 
-/* --- 【核心修復點】首頁 Hero 區塊 --- */
+/* 內頁標題樣式 */
+.page-title {
+    border-left: 5px solid var(--neon-blue);
+    padding-left: 20px;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: var(--neon-blue);
+}
+
+/* 簡單的卡片樣式 (用於課程、夥伴) */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: 0.3s;
+}
+
+.card:hover {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+/* --- 【完美修復】首頁 Hero 區塊 --- */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -138,20 +170,21 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* 關鍵：強制加上 padding-top，把標題往下推，絕對不被 header 擋到！ */
+    /* 關鍵：利用足夠的 padding-top 把標題擠下來，絕對不被 header 擋到！ */
     padding: 140px 20px 60px; 
 }
 
 .hero h1 {
     font-size: 4rem;
     color: transparent;
-    -webkit-text-stroke: 2px var(--neon-blue); 
+    -webkit-text-stroke: 2px var(--neon-blue); /* 鏤空文字效果 */
     text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
     margin-bottom: 20px;
     letter-spacing: 5px;
     line-height: 1.3; /* 確保兩行字之間有足夠高度 */
 }
 
+/* 打字機特效外框 */
 .typing-box {
     display: inline-block;
     margin-bottom: 40px;
@@ -162,7 +195,7 @@ header {
     color: var(--text-main);
     white-space: nowrap;
     overflow: hidden;
-    border-right: 3px solid var(--neon-blue); 
+    border-right: 3px solid var(--neon-blue); /* 打字機游標效果 */
     width: 0;
     animation: 
         typing 3s steps(20) forwards,
@@ -175,6 +208,7 @@ header {
     margin-bottom: 35px;
 }
 
+/* 按鈕樣式 */
 .btn {
     padding: 12px 30px;
     background: transparent;
@@ -189,7 +223,7 @@ header {
 
 .btn:hover {
     background: var(--neon-blue);
-    color: var(--bg-color); 
+    color: var(--bg-color); /* 反白效果 */
     box-shadow: 0 0 20px var(--neon-blue);
 }
 
@@ -238,12 +272,13 @@ header {
 .terminal-input {
     background: transparent;
     border: none;
-    color: inherit; /* 關鍵：改成 inherit 才會跟著 theme 指令一起變色！ */
+    color: inherit; /* 讓字體顏色繼承 theme 指令 */
     font-family: inherit;
     font-size: inherit;
     width: 100%;
     outline: none;
 }
+
 /* 404 專用樣式 */
 .error-body { display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; flex-direction: column; padding: 20px; }
 .error-code { font-size: 6rem; color: var(--neon-pink); text-shadow: 0 0 15px var(--neon-pink); margin-bottom: 10px; }
@@ -251,7 +286,11 @@ header {
 /* 動畫定義 */
 @keyframes typing { from { width: 0; } to { width: 100%; } }
 @keyframes blink { 50% { border-color: transparent; } }
-@keyframes pulse { 0% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.01); filter: hue-rotate(10deg); } 100% { opacity: 0.3; transform: scale(1); } }
+@keyframes pulse { 
+    0% { opacity: 0.3; transform: scale(1); } 
+    50% { opacity: 1; transform: scale(1.01); filter: hue-rotate(10deg); } 
+    100% { opacity: 0.3; transform: scale(1); } 
+}
 
 /* --- RWD 手機版響應式設定 --- */
 @media (max-width: 768px) {
@@ -268,7 +307,7 @@ header {
         padding: 20px 0;
         box-shadow: 0 10px 15px rgba(0, 243, 255, 0.2);
     }
-    .nav-links li { margin: 15px 0; text-align: center; width: 100%; }
+    .nav-links li { margin: 15px 0; text-align: center; width: 100%; margin-left: 0; }
     #menu-toggle:checked + .hamburger + .nav-links { display: flex; }
 
     .status-container {
